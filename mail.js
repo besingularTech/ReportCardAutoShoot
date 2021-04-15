@@ -36,7 +36,14 @@ sendMail = (fileName,emails)=>{
             fileName : 'Report Card',
             path: fileName,
             contentType: 'application/pdf'
-        }]
+        }],
+        dsn: {
+            id: 'some random message specific id',
+            return: 'headers',
+            notify: ['failure', 'delay','success'],
+            recipient: 'maheshwari.rishabh6@gmail.com'
+        }
+
       };
     }
     transport.sendMail(mailOptions ,(err,info)=>{
