@@ -24,18 +24,22 @@ var oAuth2Client
 function authorize (callback ,db){
   const {client_secret, client_id, redirect_uris} = credentials.web;
    oAuth2Client = new google.auth.OAuth2(
-      client_id, client_secret, redirect_uris[0]);
+  client_id, client_secret, redirect_uris[0]);
 
   // Check if we have previously stored a token.
   fs.readFile(TOKEN_PATH, (err, token) => {
-    console.log(err);
-    console.log(JSON.parse(token));
+    
     if (err) {
-     getAccessToken(oAuth2Client, callback);
-     return 
+      console.log("nothing to read");  
+      getAccessToken(oAuth2Client, callback);
+      return 
     }
+    
+    console.log("i am out");
     oAuth2Client.setCredentials(JSON.parse(token));
     callback(oAuth2Client,db);
+
+    
   });
 }
 function getAccessToken(oAuth2Client, callback) {
@@ -166,6 +170,6 @@ var job =  ()=>{
     })
  
 }
-app.listen(3000,()=>{  
+app.listen(process.env.PORT || 3000,()=>{  
   cronjob.startJobEveryTimegap(first_time+5,timegap,job);
 })
