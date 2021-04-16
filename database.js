@@ -17,7 +17,7 @@ const mongoClient = (cb) => {
 
 }
 const getDb = () =>{
-    console.log(_db);
+    console.log("in getdb");
     if(_db)
     {
        return _db;
