@@ -65,10 +65,10 @@ app.get('/google/callback',(req,res)=>{
         fs.writeFile(TOKEN_PATH, JSON.stringify(tokens), (err) => {
           if (err) return console.error(err);
           console.log('Token stored to', TOKEN_PATH);
-          listFiles(oAuth2Client)
+          listFiles(oAuth2Client,mongoClient.getDb())
         });
        res.redirect("/");
-      }
+      } 
     })
 })  
 
@@ -171,5 +171,8 @@ var job =  ()=>{
  
 }
 app.listen(process.env.PORT || 3000,()=>{  
-  cronjob.startJobEveryTimegap(first_time+5,timegap,job);
+  mongoClient.mongoClient(db=>{
+    authorize(listFiles,db)
+  })
+ // cronjob.startJobEveryTimegap(first_time+5,timegap,job);
 })
