@@ -1,7 +1,7 @@
 const mongoDb = require('mongodb');
 var  _db;
 
-const uri = "mongodb+srv://Rish_178:amannisha178@demo.x2f1s.mongodb.net/besingular?retryWrites=true&w=majority";
+const uri = "mongodb+srv://Akshay:AKShay8375@cluster0.ocgjn.mongodb.net/myFirstDatabase";
 const client = new mongoDb.MongoClient(uri, { useNewUrlParser: true });
 const mongoClient = (cb) => {
    console.log("connection");
